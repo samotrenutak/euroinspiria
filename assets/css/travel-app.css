@@ -1,4 +1,3 @@
-/* ========== GLOBAL LAYOUT ========== */
 html, body {
   margin: 0;
   padding: 0;
@@ -8,7 +7,6 @@ html, body {
   color: #222;
 }
 
-/* Glavni grid: mapa (2fr) + sidebar (1fr) */
 .app-wrap {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -18,43 +16,20 @@ html, body {
 }
 
 .map-wrap { grid-column: 1 / 2; grid-row: 2 / 3; position: relative; }
-#map { width: 100%; height: 100%; outline: none; }
+#map { width: 100%; height: 100%; }
 
-/* ======= TOP BAR ======= */
-.app-topbar {
-  grid-column: 1 / 3;
-  grid-row: 1 / 2;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* levo brand, centar search */
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  border-bottom: 1px solid #e5e5e5;
-  background: #fff;
-  z-index: 10;
-}
-
-.brand { display: inline-flex; align-items: center; gap: 8px; }
-.brand-logo {
-  height: 28px; width: 28px; display: inline-grid; place-items: center;
-  border-radius: 8px; background:#111; color:#fff; text-decoration:none; font-weight:700;
-}
-.brand-name { font-weight: 600; color:#333; }
-
-/* centriraj search u topbar-u */
-.app-topbar .geo-form { grid-column: 2 / 3; }
-
-/* ======= SEARCH BAR ======= */
+/* ===== SEARCH ===== */
 .geo-form {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60%;              /* širi — zauzima ~40% desne kolone */
+  width: 60%;
   min-width: 340px;
   max-width: 680px;
   margin: 10px auto;
 }
+
 .geo-form input[type="search"] {
   width: 100%;
   padding: 14px 50px 14px 18px;
@@ -63,100 +38,58 @@ html, body {
   font-size: 1.05rem;
   transition: all .2s ease;
 }
-.geo-form input[type="search"]::placeholder {
-  color: #888;
-  font-weight: 400;
-}
 .geo-form input[type="search"]:focus {
   border-color: #F27F0C;
   box-shadow: 0 0 0 3px rgba(242,127,12,.25);
   outline: none;
 }
-.btn-clear {
-  right: 48px;
-  font-size: 1.6rem;
-  color: #aaa;
+.btn-clear, .btn-search {
+  position: absolute;
   background: none;
   border: none;
   cursor: pointer;
 }
-.btn-search {
-  right: 16px;
-  font-size: 1.2rem;
-  background: none;
-  border: none;
-  color: #555;
-  cursor: pointer;
-}
+.btn-clear { right: 48px; font-size: 1.6rem; color: #aaa; }
+.btn-search { right: 16px; font-size: 1.2rem; color: #555; }
 
-/* ======= SIDEBAR ======= */
-.sidebar {
-  grid-column: 2 / 3; grid-row: 2 / 3;
-  overflow-y: auto; border-left: 1px solid #e6e6e6; background: #fff;
-  padding: 0 16px 16px;
-  scroll-behavior: smooth;
-}
-
-/* Sticky filter-bar na vrhu sidebara */
-.filter-bar {
-  position: sticky; top: 0; z-index: 5;
-  display: flex; gap: 8px; flex-wrap: wrap;
-  background: #fff;
-  padding: 12px 0 10px;
-  border-bottom: 1px solid #eee;
-}
-.filter-btn {
-  padding: 6px 12px; font-size: .85rem; border: 1px solid #ddd; border-radius: 18px;
-  background: #f6f6f6; cursor: pointer; transition: all .2s ease;
-}
-.filter-btn:hover { background: #f0f0f0; border-color:#ccc; }
-.filter-btn.is-active { background:#F27F0C; color:#fff; border-color:#F27F0C; }
-
-/* Sidebar struktura */
+/* ===== SIDEBAR ===== */
 #sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-top: 1rem;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  overflow-y: auto;
+  border-left: 1px solid #eee;
+  background: #fff;
+  padding: 16px;
 }
 
-/* Gornji red sa filterima */
-.sidebar-filters {
+/* Filter bar */
+.filter-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 12px;
-  padding: 0 8px;
 }
-
-.qf-btn {
-  background: #fff;
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 20px;
+.filter-btn {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 18px;
   padding: 6px 14px;
-  font-size: 14px;
+  font-size: .9rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all .2s;
 }
-
-.qf-btn:hover {
-  border-color: #F27F0C;
-  color: #F27F0C;
-}
-
-.qf-btn.active {
+.filter-btn:hover { background: #f0f0f0; }
+.filter-btn.is-active {
   background: #F27F0C;
-  border-color: #F27F0C;
   color: #fff;
+  border-color: #F27F0C;
 }
 
-/* Grid za destinacije */
+/* Post grid */
 .sidebar-posts {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
-  align-items: start;
 }
 
 .card {
@@ -176,34 +109,33 @@ html, body {
   object-fit: cover;
 }
 .card h3 {
-  font-size: 16px;
+  font-size: 1rem;
   padding: 8px 12px 0;
 }
 .card p {
-  font-size: 13px;
+  font-size: .85rem;
   color: #555;
   padding: 0 12px 12px;
   line-height: 1.4;
 }
 
-/* ======= MAP LEGEND ======= */
-.map-legend {
-  position: absolute; bottom: 8px; left: 8px; font-size: 12px;
-  background: rgba(255,255,255,.9); border-radius: 8px; padding: 6px 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.1); line-height: 1.3;
+/* Pin marker */
+.maplibregl-marker {
+  width: 18px;
+  height: 18px;
+  background: #F27F0C;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+  transform: translate(-50%, -50%);
+  transition: transform .15s ease;
 }
-.map-legend .legend-row { display:flex; align-items:center; gap:8px; }
-.cluster { display:inline-block; border-radius:50%; width:14px; height:14px; }
-.cluster-s{ background:#F9A825;} .cluster-m{ background:#FB8C00;} .cluster-l{ background:#F27F0C;}
-.map-status{ margin-top:4px; font-size:11px; color:#555; }
+.maplibregl-marker:hover {
+  transform: translate(-50%, -50%) scale(1.3);
+  box-shadow: 0 0 8px rgba(0,0,0,0.55);
+}
 
-/* ======= POPUP ======= */
-.maplibregl-popup-content { padding: 8px 10px; border-radius:8px; font-size:13px; line-height:1.3; max-width:220px; }
-.maplibregl-popup-content h3 { margin: 4px 0; font-size:14px; color:#2D6CDF; }
-.maplibregl-popup-content img { width:100%; border-radius:6px; margin-bottom:6px; }
-
-/* ======= AUTOCOMPLETE DROPDOWN ======= */
-.geo-form { position: relative; }
+/* Geo-suggest dropdown */
 .geo-suggest {
   position: absolute;
   top: 100%;
@@ -221,32 +153,96 @@ html, body {
 .geo-suggest li {
   padding: 8px 12px;
   cursor: pointer;
-  transition: background .15s ease;
+  transition: background .15s;
 }
 .geo-suggest li:hover,
-.geo-suggest li.active {
-  background: #f4f6fa;
-}
-.geo-suggest .gs-title { font-weight: 600; color: #222; display: block; }
-.geo-suggest .gs-sub { font-size: 12px; color: #777; }
+.geo-suggest li.active { background: #f4f6fa; }
+.gs-title { font-weight: 600; color: #222; display: block; }
+.gs-sub { font-size: 12px; color: #777; }
 
-/* Focus stil na inputu */
-#geo-search:focus { outline: none; box-shadow: 0 0 0 3px rgba(242,127,12,.25); border-color:#F27F0C; }
-
-/* ======= RESPONSIVE ======= */
 @media (max-width: 960px) {
   .app-wrap { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr; }
-  .map-wrap { grid-column: 1 / 2; grid-row: 3 / 4; }
-  .sidebar  { grid-column: 1 / 2; grid-row: 2 / 3; height: 42vh; }
-  .app-topbar { grid-template-columns: 1fr; }
-  .app-topbar .geo-form { grid-column: 1 / 2; max-width: 100%; }
-  .filter-bar { top: 0; }
+  #sidebar { grid-column: 1 / 2; height: 45vh; }
 }
-/* Sakrij globalni header i page naslov na Live Map stranici */
-body.page-template-template-live-map #header,
-body.page-template-template-live-map header.site-header,
-body.page-template-template-live-map .entry-header,
-body.page-template-template-live-map .page-title {
-  display: none !important;
+/* --- CSS marker (uvek iste veličine) --- */
+.maplibregl-marker {
+  background: #F27F0C !important;
+  border: 2px solid #fff !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+  z-index: 10;
 }
 
+/* --- POPUP modernizovan --- */
+.maplibregl-popup-content {
+  border-radius: 12px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.maplibregl-popup-close-button {
+  top: 6px !important;
+  right: 6px !important;
+  color: #333 !important;
+}
+
+.popup img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.popup h3 {
+  font-size: 1rem;
+  margin: 8px 10px;
+}
+
+.popup h3 a {
+  text-decoration: none;
+  color: #222;
+}
+
+/* --- GEO SUGGEST (live search) --- */
+.geo-suggest {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  z-index: 999;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.geo-suggest ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.geo-suggest li {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f3f3f3;
+  cursor: pointer;
+}
+
+.geo-suggest li:hover {
+  background: #f8f8f8;
+}
+
+.gs-title {
+  font-weight: 600;
+}
+
+.gs-sub {
+  display: block;
+  font-size: 12px;
+  color: #777;
+}
