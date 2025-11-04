@@ -246,3 +246,43 @@ html, body {
   font-size: 12px;
   color: #777;
 }
+/* Sakrij default MapLibre SVG pin koji se ubacuje u marker */
+.maplibregl-marker svg {
+  display: none !important;
+}
+
+/* Ostavi samo naš narandžasti CSS marker */
+.maplibregl-marker {
+  background: #F27F0C !important;
+  border: 2px solid #fff !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Popravka pozicije i vidljivosti geocoder dropdowna */
+.geo-suggest {
+  z-index: 9999 !important;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.geo-suggest ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.geo-suggest li {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.geo-suggest li:hover {
+  background: #f8f8f8;
+}
