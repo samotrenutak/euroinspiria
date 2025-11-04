@@ -102,10 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
       posts.forEach((p) => {
         const el = document.createElement("article");
         el.className = "card";
+        const shortExcerpt =
+          p.excerpt && p.excerpt.length > 80
+            ? p.excerpt.substring(0, 80) + "…"
+            : p.excerpt || "";
+
         el.innerHTML = `
-          ${p.thumb ? `<img src="${p.thumb}" alt="">` : ""}
-          <h3><a href="${p.link}">${p.title}</a></h3>
-          <p>${p.excerpt}</p>
+          ${p.thumb ? `<img src="${p.thumb}" alt="${p.title}">` : ""}
+          <div class="card-body">
+            <h3><a href="${p.link}" target="_blank">${p.title}</a></h3>
+            <p>${shortExcerpt}</p>
+          </div>
         `;
         grid.appendChild(el);
       });
