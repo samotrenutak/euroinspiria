@@ -286,3 +286,37 @@ html, body {
 .geo-suggest li:hover {
   background: #f8f8f8;
 }
+/* === Geo-suggest dropdown fade efekat === */
+.geo-suggest {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.geo-suggest.hide {
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+}
+/* === Pulsirajući marker (CSS animacija) === */
+.maplibregl-marker {
+  width: 18px;
+  height: 18px;
+  background: #f27f0c;
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(242, 127, 12, 0.4);
+  animation: pulse 2s infinite;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(242, 127, 12, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(242, 127, 12, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(242, 127, 12, 0);
+  }
+}

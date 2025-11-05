@@ -10,6 +10,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const status = document.getElementById("map-status");
   const searchForm = document.getElementById("geo-form");
   const searchInput = document.getElementById("geo-search");
+// === Sakrij geo-suggest kada korisnik klikne van inputa ===
+document.addEventListener("click", (e) => {
+  const suggestBox = document.querySelector(".geo-suggest");
+  const input = document.getElementById("geo-search");
+
+  if (suggestBox && !suggestBox.contains(e.target) && e.target !== input) {
+    suggestBox.classList.add("hide");
+    setTimeout(() => {
+      suggestBox.style.display = "none";
+    }, 250);
+  }
+});
+
+document.getElementById("geo-search").addEventListener("input", () => {
+  const suggestBox = document.querySelector(".geo-suggest");
+  if (suggestBox) {
+    suggestBox.style.display = "block";
+    suggestBox.classList.remove("hide");
+  }
+});
   const clearBtn = document.getElementById("geo-clear");
 
   // === Inicijalizacija mape ===
@@ -167,12 +187,7 @@ const GEO_SYNONYMS = {
 
   // Crna Gora
   "crna gora": "montenegro",
-  "podgorica": "podgorica",
-  "niksic": "niksic", "nikšić": "niksic",
-  "herceg novi": "herceg novi",
-  "kotor": "kotor",
-  "budva": "budva",
-  "ulcinj": "ulcinj",
+  "niksic": "nikšić", "nikšić": "niksic",
 
   // Bosna i Hercegovina
   "bosna": "bosnia and herzegovina", "bosna i hercegovina": "bosnia and herzegovina", "bih": "bosnia and herzegovina",
@@ -312,7 +327,7 @@ const GEO_SYNONYMS = {
   "venecija": "venice", "venezia": "venice",
   "dzenova": "genoa", "đenova": "genoa", "genova": "genoa",
   "bolonja": "bologna", "bologna": "bologna",
-  "bari": "bari", "palermo": "palermo",
+  "trst": "trieste",
 
   // Španija
   "spanija": "spain", "španija": "spain", "espana": "spain", "españa": "spain",
